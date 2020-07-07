@@ -60,43 +60,54 @@ const waitlist = [
     
 ]
 
-// Basic route that sends the user first to the AJAX Page
+
+const templatesDir = path.resolve(__dirname, "HTML");
 
 //directs tp the home page
 app.get("/api/home", function(req, res) {
-    res.sendFile(path.join(__dirname, "home.html"));
+    res.sendFile(path.join(templatesDir, "home.html"));
 });
   
 //directs to the reservation page
 app.get("/api/reserve", function(req, res) {
-    res.sendFile(path.join(__dirname, "reserve.html"));
+    res.sendFile(path.join(templatesDir, "reserve.html"));
 });
   
 //directs to the tables page
 app.get("/api/tables", function(req, res) {
-    res.sendFile(path.join(__dirname, "tables.html"));
+    res.sendFile(path.join(templatesDir, "tables.html"));
 });
 
-//directs to the tables page
-app.get("/tables", function (req, res) {
-  res.sendFile(path.join(__dirname, "tables.html"));
-});
+// Displays a single character, or returns false
+app.get("/api/tables/:reserve", function(req, res) {
+    const chosen = req.params.reservation;
+  
+    console.log(chosen);
+  
+    for (var i = 0; i < reservation.length; i++) {
+      if (chosen === reservation[i].routeName) {
+        return res.json(reservation[i]);
+      }
+    }
+  
+    return res.json(false);
+  });
 
 //adding new reservation to tables page
 app.post("/api/tables", function(req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
-    var newCharacter = req.body;
+    const newReservation = req.body;
   
     // Using a RegEx Pattern to remove spaces from newCharacter
     // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-    newCharacter.routeName = newCharacter.name.replace(/\s+/g, "").toLowerCase();
+    newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
   
-    console.log(newCharacter);
+    console.log(newReservation);
   
-    characters.push(newCharacter);
+    characters.push(newReservation);
   
-    res.json(newCharacter);
+    res.json(newReservation);
 });
 
 // Starts the server to begin listening
