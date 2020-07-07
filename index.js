@@ -1,3 +1,4 @@
+
 // Dependencies
 const express = require('express')
 const path = require('path')
@@ -5,6 +6,7 @@ const path = require('path')
 // set up Express
 const app = express()
 const PORT = 3000
+
 
 // DATA
 
@@ -32,6 +34,14 @@ const reservation = [
         customerEmail: 'ganon@email.com',
         customerID: '1234',
         phoneNumber: '123-456-7890',
+=======
+app.listen(port, function() {
+    console.log("Listening at PORT " + port);
+});
+
+//Reservation Questions
+
+const reserved = []
 
     }
 ]
@@ -54,6 +64,7 @@ app.get("/", function(req, res) {
   });
 
 });
+
 
 // Server listening
 app.listen(PORT, function() {
