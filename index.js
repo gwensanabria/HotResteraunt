@@ -7,6 +7,11 @@ const app = express()
 const PORT = 3000
 
 // DATA
+
+const reserved = []
+
+const waiting = []
+
 const reservation = [
     {
         customerName: 'Link',
